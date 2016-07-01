@@ -11,13 +11,13 @@ Makes the following changes:
  - Turns <b> tags into <strong> tags.
  - Turns <i> tags into <em> tags.
  - Removes empty header tags.
-Version: 0.3.5
+Version: 0.3.6
 Author: Matt Berg, David Lentz
 */
 
 defined( 'ABSPATH' ) or die( 'No hackers' );
 
-if( ! class_exists( 'Boise_State_Scan_New_Content_Plugin_Updater' ) ){
+if( ! class_exists( 'Boise_State_Plugin_Updater' ) ){
 	include_once( plugin_dir_path( __FILE__ ) . 'updater.php' );
 }
 
