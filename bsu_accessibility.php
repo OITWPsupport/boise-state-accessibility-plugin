@@ -1,7 +1,8 @@
 <?php
 /*
 Plugin Name: Boise State Accessibility
-Description: Plugin for fixing minor accessibility issues programmatically. Makes the following changes:
+Description: Plugin for fixing minor accessibility issues programmatically. 
+Makes the following changes:
  - Adds title="Calendar" to Google Calendar iframes.
  - Adds title="Slides" to Slideshare iframes.
  - Adds title="Video" to Youtube and Vimeo and Techsmithrelay iframes.
@@ -10,7 +11,7 @@ Description: Plugin for fixing minor accessibility issues programmatically. Make
  - Turns <b> tags into <strong> tags.
  - Turns <i> tags into <em> tags.
  - Removes empty header tags.
-Version: 0.3.2
+Version: 0.3.3
 Author: Matt Berg, David Lentz
 */
 
