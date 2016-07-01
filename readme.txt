@@ -1,7 +1,7 @@
 === BSU Accessibility ===
 Contributors: Matt Berg, David M. Lentz
 Requires at least: 4.4.2
-Stable tag: 0.3.6
+Stable tag: 0.3.7
 Tested up to: 4.4.2
 
 Plugin for fixing minor accessibility issues programmatically.
