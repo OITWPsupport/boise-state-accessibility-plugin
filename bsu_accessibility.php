@@ -11,7 +11,8 @@ Makes the following changes:
  - Turns <b> tags into <strong> tags.
  - Turns <i> tags into <em> tags.
  - Removes empty header tags.
-Version: 0.3.7
+ - Removes empty <a> tags created by NavXT breadcrumb navigation
+Version: 0.3.8
 Author: Matt Berg, David Lentz
 */
 
@@ -103,6 +104,39 @@ function bsu_accessibility($content){
 		
 	}
 
+
+	// Next, find and remove empty a tags create by the NavXT plugin (which, in our case, is rolled into Framewerk):
+	$aTagsToRemove = array();
+    $aTags = $dom->getElementsByTagName("a");
+    
+	// Scope this to look at a tags only within the #breadcrumb_wrap page element.
+	// Here's an example of the problem code. The problem isn't so much the empty HREF
+	// value; it's actually the lack of text inside the <a></a>:
+	// <a title="Go to Faculty Grading FAQs." href=""></a> (select with "#breadcrumb_wrap > ul:nth-child(1) > li:nth-child(2) > a:nth-child(1)")
+
+	// From http://php.net/manual/en/class.domxpath.php
+    // example 2: for node data in a selected id
+	$NavxtElements = $xpath->query("/html/body/div[@id='breadcrumb_wrap']/ul/li");
+	
+	if (!is_null($NavxtElements)) {
+		foreach ($NavxtElements as $element) {	// NavxtElements is a DOMNodeList (<li>'s)
+			$nodes = $element->childNodes; // Get all the children of the LI & put 'em in $nodes
+			foreach ($nodes as $node) {
+				if ($node->nodeName == 'a') {
+					if (strlen($node->innerHTML) == 0) {
+						// Add this empty tag to the "tags to be removed" array:
+						$aTagsToRemove[] = $node;
+					}
+				}
+			}
+		}	
+	}
+    
+	foreach($aTagsToRemove as $aTagToRemove) {
+		$aTagToRemove->parentNode->removeChild($aTagToRemove);
+	}
+
+
 	// SAVING THIS FOR A FUTURE VERSION. Does not work reliably right now:
 	// A pair of A tags with only images inside them will disappear, images and all.
 	// C14N may be a way to handle this, but it returns the string including the tags, 
@@ -116,25 +150,6 @@ function bsu_accessibility($content){
     foreach($aTags as $aTag){
    		// if (strlen($aTag->nodeValue) == 0) {
    		if (strlen($aTag->C14N()) == 0) {
-			$aTagsToRemove[] = $aTag;
-		}
-    }
-    
-	foreach($aTagsToRemove as $aTagToRemove) {
-		$aTagToRemove->parentNode->removeChild($aTagToRemove);
-	}
-
-
-	// This is a stripped-down version of the block above. This one will just 
-	// remove a pair of A tags if both the href value and node value are empty. 
-	// This is happening currently when we pair Breadcrumb NavXT with Arconix FAQ.
-
-	// Next, find any empty a tags and remove them.	
-	$aTagsToRemove = array();
-
-    $aTags = $dom->getElementsByTagName("a");
-    foreach($aTags as $aTag){
-   		if (strlen($aTag->getAttribute('href')) == 0) {
 			$aTagsToRemove[] = $aTag;
 		}
     }
