@@ -115,15 +115,15 @@ function bsu_accessibility($content){
 	// <a title="Go to Faculty Grading FAQs." href=""></a> (select with "#breadcrumb_wrap > ul:nth-child(1) > li:nth-child(2) > a:nth-child(1)")
 
 	// From http://php.net/manual/en/class.domxpath.php
-    // example 2: for node data in a selected id
-	$NavxtElements = $xpath->query("/html/body/div[@id='breadcrumb_wrap']/ul/li");
+	$query = "//div[@id=\"breadcrumb_wrap\"]/ul/li";
+	$NavxtElements = $xpath->query($query);
 	
 	if (!is_null($NavxtElements)) {
 		foreach ($NavxtElements as $element) {	// NavxtElements is a DOMNodeList (<li>'s)
 			$nodes = $element->childNodes; // Get all the children of the LI & put 'em in $nodes
 			foreach ($nodes as $node) {
 				if ($node->nodeName == 'a') {
-					if (strlen($node->innerHTML) == 0) {
+					if (strlen($node->nodeValue) == 0) {
 						// Add this empty tag to the "tags to be removed" array:
 						$aTagsToRemove[] = $node;
 					}
