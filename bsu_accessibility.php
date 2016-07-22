@@ -12,7 +12,7 @@ Makes the following changes:
  - Turns <i> tags into <em> tags.
  - Removes empty header tags.
  - Removes empty <a> tags created by NavXT breadcrumb navigation
-Version: 0.3.8
+Version: 0.3.9
 Author: Matt Berg, David Lentz
 */
 
