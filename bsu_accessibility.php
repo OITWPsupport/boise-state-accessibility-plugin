@@ -22,7 +22,7 @@ if( ! class_exists( 'Boise_State_Plugin_Updater' ) ){
 }
 
 $updater = new Boise_State_Plugin_Updater( __FILE__ );
-$updater->set_username( 'davidmlentz' );
+$updater->set_username( 'OITWPsupport' );
 $updater->set_repository( 'boise-state-accessibility-plugin' );
 $updater->initialize();
 
