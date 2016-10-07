@@ -103,6 +103,15 @@ function bsu_accessibility($content){
 		
 	}
 
+	// The Event Espresso plugin introduces some WCAG errors. This block adds a title
+	// to any field named 'tkt-slctr-request-processor-email'
+	$fields = $document->getElementsByTagName('input');
+	foreach($fields as $field) {
+		if ($field->getAttribute('name') == 'tkt-slctr-request-processor-email') {
+			$field->setAttribute('title', 'tkt-slctr-request-processor-email-hidden');
+		}
+	}
+
 	// SAVING THIS FOR A FUTURE VERSION. Does not work reliably right now:
 	// A pair of A tags with only images inside them will disappear, images and all.
 	// C14N may be a way to handle this, but it returns the string including the tags, 
