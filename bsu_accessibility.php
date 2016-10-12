@@ -8,10 +8,10 @@ Makes the following changes:
  - Adds title="Video" to Youtube and Vimeo and Techsmithrelay iframes.
  - Adds title="Embedded document" to Google Doc iframes.
  - Adds summary attribute to tablepress tables (using the Description provided by the table's creator).
- - Turns <b> tags into <strong> tags.
- - Turns <i> tags into <em> tags.
+ - Turns <b> tags into <strong> tags. REMOVING THIS TEMPORARILY as of 0.3.14beta.
+ - Turns <i> tags into <em> tags. REMOVING THIS TEMPORARILY as of 0.3.14beta.
  - Removes empty header tags.
-Version: 0.3.14
+Version: 0.3.14beta
 Author: Matt Berg, David Lentz
 */
 
@@ -103,6 +103,8 @@ function bsu_accessibility($content){
 		
 	}
 
+	// SAVING THIS FOR A FUTURE VERSION: Event Espresso stuff we may or may not use
+	/*
 	// The Event Espresso plugin introduces some WCAG errors. This block adds a title
 	// to any field named 'tkt-slctr-request-processor-email'
 	$fields = $document->getElementsByTagName('input');
@@ -137,6 +139,8 @@ function bsu_accessibility($content){
 
 		}
 	}
+	*/
+	// END SAVE FOR FUTURE VERSION: Event Espresso
 
 	// SAVING THIS FOR A FUTURE VERSION. Does not work reliably right now:
 	// A pair of A tags with only images inside them will disappear, images and all.
@@ -179,6 +183,7 @@ function bsu_accessibility($content){
 	}
 */
 
+
 	// Save the DOM changes: create a new string to hold the revised HTML 
 	// $html = $dom->saveHTML();
 	// Do it this way instead (we'd been getting a lot of errant &Acirc; chars showing up):
@@ -191,11 +196,16 @@ function bsu_accessibility($content){
 	// ...and aims to prevent the additional DOCTYPE, HTML, and BODY tags that the previous saveHTML call adds:
 	$html = preg_replace('/^<!DOCTYPE.+?>/', '', str_replace( array('<html>', '</html>', '<body>', '</body>'), array('', '', '', ''), $dom->saveHTML()));
 
+	// REMOVING THIS TEMPORARILY. We can re-scan to see if these tags are still a problem that needs to be fixed programmatically.
+	// If they are, we need to revise this as it'll cause a mis-matched pair of tags in the case of, e.g. 
+	// <i class="something">AHA!</i>
+	//
 	// Look for <b> and <i> tags and replace them with <strong> and <em>, respectively.
+	/*
 	$find = array("<b>", "</b>", "<i>", "</i>", "<B>", "</B>", "<I>", "</I>");
 	$replace = array("<strong>", "</strong>", "<em>", "</em>", "<strong>", "</strong>", "<em>", "</em>");
-
 	$html = str_replace($find, $replace, $html); 
+	*/
 
 	return $html;
 
