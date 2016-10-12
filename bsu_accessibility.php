@@ -11,7 +11,7 @@ Makes the following changes:
  - Turns <b> tags into <strong> tags. REMOVING THIS TEMPORARILY as of 0.3.14beta.
  - Turns <i> tags into <em> tags. REMOVING THIS TEMPORARILY as of 0.3.14beta.
  - Removes empty header tags.
-Version: 0.3.14beta
+Version: 0.4.0
 Author: Matt Berg, David Lentz
 */
 
