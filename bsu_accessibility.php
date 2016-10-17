@@ -103,45 +103,6 @@ function bsu_accessibility($content){
 		
 	}
 
-	// SAVING THIS FOR A FUTURE VERSION: Event Espresso stuff we may or may not use
-	/*
-	// The Event Espresso plugin introduces some WCAG errors. This block adds a title
-	// to any field named 'tkt-slctr-request-processor-email'
-	$fields = $document->getElementsByTagName('input');
-	foreach($fields as $field) {
-		if ($field->getAttribute('name') == 'tkt-slctr-request-processor-email') {
-			$field->setAttribute('title', 'tkt-slctr-request-processor-email-hidden');
-		}
-	}
-
-	$tables = $dom->getElementsByTagName('table');
-	foreach($tables as $table) {
-		if ($table->getAttribute('class') == 'fc-border-separate') {
-			// Remove the style attribute from the table tag to get rid of any
-			// presentational attributes.
-			$field->setAttribute('style', '');
-			// TODO?: need to add "width:100%" (which we just removed from the table tag)
-			// on to the class 'fc-border-separate'
-		}
-	}
-
-	$tablerows = $dom->getElementsByTagName('tr');
-	foreach($tablerows as $tablerow) {
-		if ($tablerow->getAttribute('class') == 'fc-day-header') {	
-
-			// TODO: actually, this'll be only one of several class designations on this 
-			// tag, so we shouldn't do a literal string compare.
-			
-			$tablerow->setAttribute('style', '');
-
-			// TODO: need to add "width: 92px;" (which we just removed from the TR tag)
-			// on to the class 'fc-day-header'
-
-		}
-	}
-	*/
-	// END SAVE FOR FUTURE VERSION: Event Espresso
-
 	// SAVING THIS FOR A FUTURE VERSION. Does not work reliably right now:
 	// A pair of A tags with only images inside them will disappear, images and all.
 	// C14N may be a way to handle this, but it returns the string including the tags, 
