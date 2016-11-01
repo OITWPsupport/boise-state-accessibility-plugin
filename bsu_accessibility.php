@@ -8,10 +8,10 @@ Makes the following changes:
  - Adds title="Video" to Youtube and Vimeo and Techsmithrelay iframes.
  - Adds title="Embedded document" to Google Doc iframes.
  - Adds summary attribute to tablepress tables (using the Description provided by the table's creator).
- - Turns <b> tags into <strong> tags. REMOVING THIS TEMPORARILY as of 0.3.14beta.
- - Turns <i> tags into <em> tags. REMOVING THIS TEMPORARILY as of 0.3.14beta.
+ - Turns <b> tags into <strong> tags.
+ - Turns <i> tags into <em> tags.
  - Removes empty header tags.
-Version: 0.4.0
+Version: 0.4.1
 Author: Matt Berg, David Lentz
 */
 
@@ -157,16 +157,8 @@ function bsu_accessibility($content){
 	// ...and aims to prevent the additional DOCTYPE, HTML, and BODY tags that the previous saveHTML call adds:
 	$html = preg_replace('/^<!DOCTYPE.+?>/', '', str_replace( array('<html>', '</html>', '<body>', '</body>'), array('', '', '', ''), $dom->saveHTML()));
 
-	// REMOVING THIS TEMPORARILY. We can re-scan to see if these tags are still a problem that needs to be fixed programmatically.
-	// If they are, we need to revise this as it'll cause a mis-matched pair of tags in the case of, e.g. 
-	// <i class="something">AHA!</i>
-	//
 	// Look for <b> and <i> tags and replace them with <strong> and <em>, respectively.
-	/*
-	$find = array("<b>", "</b>", "<i>", "</i>", "<B>", "</B>", "<I>", "</I>");
-	$replace = array("<strong>", "</strong>", "<em>", "</em>", "<strong>", "</strong>", "<em>", "</em>");
-	$html = str_replace($find, $replace, $html); 
-	*/
+	$html = replaceTagsIB($html);
 
 	return $html;
 
@@ -175,6 +167,20 @@ function bsu_accessibility($content){
 		libxml_clear_errors();
 	} 	
 
+}
+
+/**
+  * Replaces <i> and <b> tags with <em> and <strong> tags.
+  * From http://loopduplicate.com/content/replace-i-and-b-tags-with-em-and-strong-tags-using-php
+  * 
+  * @param string $string The input string.
+  * @return string The filtered text.
+  */
+function replaceTagsIB($string) {
+	$pattern = array('`(<b)([^\w])`i', '`(<i)([^\w])`i');
+	$replacement = array("<strong$2", "<em$2");
+	$subject = str_replace(array('</b>', '</i>', '</B>', '</I>'), array('</strong>', '</em>', '</strong>', '</em>'), $string);
+	return preg_replace($pattern, $replacement, $subject);
 }
 
 // The 3rd parameter here sets the priority. It's optional and defaults to 10.
