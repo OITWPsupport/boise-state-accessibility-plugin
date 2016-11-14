@@ -11,7 +11,7 @@ Makes the following changes:
  - Turns <b> tags into <strong> tags.
  - Turns <i> tags into <em> tags.
  - Removes empty header tags.
-Version: 0.4.1
+Version: 0.4.2
 Author: Matt Berg, David Lentz
 */
 
@@ -43,7 +43,10 @@ function bsu_accessibility($content){
 	foreach($iframes as $iframe){
 		$src = $iframe->getAttribute('src');
 		$iframe->removeAttribute('frameborder');
-		if(!$iframe->hasAttribute('title')){
+		if(
+			(!$iframe->hasAttribute('title')) ||
+			($iframe->getAttribute('title') == '')
+		{
 			if(strpos($src, '//calendar.google.com') !== false){
 				$iframe->setAttribute('title', 'Calendar');
 			} elseif(strpos($src, '//www.youtube.com') !== false){
