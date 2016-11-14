@@ -46,7 +46,7 @@ function bsu_accessibility($content){
 		if(
 			(!$iframe->hasAttribute('title')) ||
 			($iframe->getAttribute('title') == '')
-		{
+		){
 			if(strpos($src, '//calendar.google.com') !== false){
 				$iframe->setAttribute('title', 'Calendar');
 			} elseif(strpos($src, '//www.youtube.com') !== false){
