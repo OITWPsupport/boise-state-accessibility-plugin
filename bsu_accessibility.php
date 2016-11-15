@@ -188,5 +188,5 @@ function replaceTagsIB($string) {
 
 // The 3rd parameter here sets the priority. It's optional and defaults to 10.
 // By setting this higher, these string replacements happen *after* other plugins (like Tablepress) have done their thing.
-add_filter('the_content', 'bsu_accessibility', 300);
-add_filter('the_excerpt', 'bsu_accessibility', 300);
+add_filter('the_content', 'bsu_accessibility', 999);
+add_filter('the_excerpt', 'bsu_accessibility', 999);
