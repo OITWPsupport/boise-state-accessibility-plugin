@@ -2,6 +2,7 @@
 /*
 Plugin Name: Boise State Accessibility
 Description: Plugin for fixing minor accessibility issues programmatically. 
+Plugin URI: https://github.com/OITWPsupport/boise-state-accessibility-plugin/releases/latest
 Makes the following changes:
  - Adds title="Calendar" to Google Calendar iframes.
  - Adds title="Slides" to Slideshare iframes.
@@ -13,6 +14,7 @@ Makes the following changes:
  - Removes empty header tags.
 Version: 0.4.3
 Author: Matt Berg, David Lentz
+Author URI: https://webguide.boisestate.edu/
 */
 
 defined( 'ABSPATH' ) or die( 'No hackers' );
