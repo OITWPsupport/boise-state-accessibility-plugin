@@ -12,7 +12,7 @@ Makes the following changes:
  - Turns <b> tags into <strong> tags.
  - Turns <i> tags into <em> tags.
  - Removes empty header tags.
-Version: 0.4.6
+Version: 0.4.7
 Author: Matt Berg, David Lentz
 Author URI: https://webguide.boisestate.edu/
 */
